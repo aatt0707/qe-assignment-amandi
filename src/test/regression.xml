@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="testLogin" verbose="1" configfailurepolicy="continue">
+    <test name="testLogin">
+       <!-- <packages>
+            <package name="sysco.com.pom_Issue_Fix.tests"/>
+        </packages>-->
+        <classes>
+            <class name="sysco.com.pom_Issue_Fix.tests.LoginTest"></class>
+            <class name="sysco.com.pom_Issue_Fix.tests.MyAccountTest"></class>
+            <class name="sysco.com.pom_Issue_Fix.tests.CartTest"></class>
+           <class name="sysco.com.pom_Issue_Fix.tests.CheckoutTest"></class>
+        </classes>
+    </test>
+</suite>
