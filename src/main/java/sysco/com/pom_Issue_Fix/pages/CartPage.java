@@ -72,11 +72,11 @@ public class CartPage {
 
         LoginPage.syscoLabUIOgm.findElement(By.xpath("//a[@href='https://www.theathletesfoot.com.au/']")).click();
 
-        LoginPage.syscoLabUIOgm.setTimeOut(1000);
+        LoginPage.syscoLabUIOgm.setTimeOut(3000);
         LoginPage.syscoLabUIOgm.waitTillElementLoaded(By.xpath("//a[@href = 'https://www.theathletesfoot.com.au/shop/hubs/fitness/clothing']"));
         LoginPage.syscoLabUIOgm.scrollToElement(By.xpath("//a[@href = 'https://www.theathletesfoot.com.au/shop/hubs/fitness/clothing']"));
         WebElement fitnessClothing = LoginPage.syscoLabUIOgm.findElement(By.xpath("//a[@href = 'https://www.theathletesfoot.com.au/shop/hubs/fitness/clothing']"));
-        LoginPage.syscoLabUIOgm.moveToAndClick(fitnessClothing);
+        LoginPage.syscoLabUIOgm.click(fitnessClothing);
 
         List<WebElement> products = LoginPage.syscoLabUIOgm.findElements(By.xpath("//a[@class='product-item-link']"));
         int categoryCount = products.size();
@@ -86,10 +86,21 @@ public class CartPage {
         int randomValue = random.nextInt(products.size());
         LoginPage.syscoLabUIOgm.moveToAndClick(products.get(randomValue));
 
-        WebElement element =  LoginPage.syscoLabUIOgm.findElement(By.xpath("//div[contains(text(),'MED')]"));
-        LoginPage.syscoLabUIOgm.scrollToElement(element);
+        //WebElement element =  LoginPage.syscoLabUIOgm.findElement(By.xpath("//div[contains(text(),'MED')]"));
+        //LoginPage.syscoLabUIOgm.scrollToElement(element);
+        //JavascriptExecutor executor = (JavascriptExecutor)LoginPage.syscoLabUIOgm.getDriver();
+        //executor.executeScript("arguments[0].click();", element);
+
+        List<WebElement> productSize = LoginPage.syscoLabUIOgm.findElements(By.xpath("//div[@class='swatch-option text']"));
+        int productSizeCount = productSize.size();
+        System.out.println(productSizeCount);
+
+        Random randomSize = new Random();
+        int randomSizeValue = randomSize.nextInt(productSize.size());
+        //LoginPage.syscoLabUIOgm.moveToAndClick(productSize.get(randomSizeValue));
+        LoginPage.syscoLabUIOgm.scrollToElement(productSize.get(randomSizeValue));
         JavascriptExecutor executor = (JavascriptExecutor)LoginPage.syscoLabUIOgm.getDriver();
-        executor.executeScript("arguments[0].click();", element);
+        executor.executeScript("arguments[0].click();", productSize.get(randomSizeValue));
 
         WebElement addToCartBtn = LoginPage.syscoLabUIOgm.findElement(By.id("product-addtocart-button"));
         LoginPage.syscoLabUIOgm.scrollToElement(addToCartBtn);
