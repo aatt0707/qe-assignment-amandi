@@ -9,7 +9,7 @@
             <class name="sysco.com.pom_Issue_Fix.tests.LoginTest"></class>
             <class name="sysco.com.pom_Issue_Fix.tests.MyAccountTest"></class>
             <class name="sysco.com.pom_Issue_Fix.tests.CartTest"></class>
-           <class name="sysco.com.pom_Issue_Fix.tests.CheckoutTest"></class>
+            <class name="sysco.com.pom_Issue_Fix.tests.CheckoutTest"></class>
         </classes>
     </test>
 </suite>

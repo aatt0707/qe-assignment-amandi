@@ -7,6 +7,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class CartPage {
 
@@ -17,18 +18,41 @@ public class CartPage {
         //check whether cart has any items in it
         LoginPage.syscoLabUIOgm.click(LoginPage.syscoLabUIOgm.findElement(By.xpath("//div[@class='minicart-wrapper']")));
 
-            //boolean isNoItemMessageDisplayed = LoginPage.syscoLabUIOgm.findElements(By.xpath("//span[contains(text(),'You have no items in your shopping cart.')]")).size() > 0;
-            //LoginPage.syscoLabUIOgm.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+            //List<WebElement> msgList = LoginPage.syscoLabUIOgm.findElements(By.xpath("//span[contains(text(),'You have no items in your shopping cart.')]"));
+           // LoginPage.syscoLabUIOgm.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
-           /* if(isNoItemMessageDisplayed){
+        /*try{
+            if(msgList.size()>0){
+                System.out.println("invalid");
                 String noItemMessage = LoginPage.syscoLabUIOgm.findElement(By.xpath("//span[contains(text(),'You have no items in your shopping cart.')]")).getText();
                 softAssert.assertEquals(noItemMessage,"You have no items in your shopping cart.");
                 softAssert.assertAll();
-            }else{
-                LoginPage.syscoLabUIOgm.scrollToElement(By.xpath("//a[@href='https://www.theathletesfoot.com.au/checkout/cart/']"));
+
+                LoginPage.syscoLabUIOgm.setTimeOut(1000);
+                String pageTitle = LoginPage.syscoLabUIOgm.getTitle();
+                System.out.println(pageTitle);
+
+                softAssert.assertEquals(pageTitle,"My Account");
+                softAssert.assertAll();
+            }
+            else{
+
+                System.out.println("valid");
+
                 WebElement viewCart = LoginPage.syscoLabUIOgm.findElement(By.xpath("//a[@href='https://www.theathletesfoot.com.au/checkout/cart/']"));
-                LoginPage.syscoLabUIOgm.click(viewCart);
-            }*/
+                LoginPage.syscoLabUIOgm.moveToAndClick(viewCart);
+
+                LoginPage.syscoLabUIOgm.setTimeOut(1000);
+                String pageTitle = LoginPage.syscoLabUIOgm.getTitle();
+                System.out.println(pageTitle);
+
+                softAssert.assertEquals(pageTitle,"Shopping Cart");
+                softAssert.assertAll();
+            }
+        }catch(Exception e){
+            System.out.println("Exception");
+        }*/
+
         LoginPage.syscoLabUIOgm.setTimeOut(1000);
         LoginPage.syscoLabUIOgm.scrollToElement(By.xpath("//a[@href='https://www.theathletesfoot.com.au/checkout/cart/']"));
         WebElement viewCart = LoginPage.syscoLabUIOgm.findElement(By.xpath("//a[@href='https://www.theathletesfoot.com.au/checkout/cart/']"));
@@ -40,12 +64,6 @@ public class CartPage {
 
         softAssert.assertEquals(pageTitle,"Shopping Cart");
         softAssert.assertAll();
-
-        /*String noItemMessage = LoginPage.syscoLabUIOgm.findElement(By.xpath("//span[contains(text(),'You have no items in your shopping cart.')]")).getText();
-        softAssert.assertEquals(noItemMessage,"You have no items in your shopping cart.");
-        softAssert.assertAll();*/
-
-
 
     }
     public void manageShoppingCart(){
