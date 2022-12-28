@@ -54,7 +54,7 @@ public class LoginPage {
 
         String errorMessage2 = syscoLabUIOgm.getText(syscoLabUIOgm.findElement(By.id("pass-error")));
         softAssert.assertEquals(errorMessage2.equalsIgnoreCase("This is a required field."), true);
-        syscoLabUIOgm.setTimeOut(2000);
+        syscoLabUIOgm.setTimeOut(5000);
         syscoLabUIOgm.refreshBrowser();
 
         //validate incorrect credentials validation

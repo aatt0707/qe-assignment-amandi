@@ -6,9 +6,17 @@ import sysco.com.pom_Issue_Fix.utils.TestBase;
 
 public class CartTest extends TestBase {
     @Test
-    public void viewCart() throws Exception{
+    public void viewCart() throws Exception {
         Cart.viewShoppingCart();
+    }
+
+    @Test
+    public void manageShoppingCart() throws Exception {
         Cart.manageShoppingCart();
+    }
+
+    @Test
+    public void addItemsToShoppingCart() throws Exception {
         Cart.addItemsToShoppingCart();
     }
 }

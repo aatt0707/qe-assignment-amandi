@@ -7,7 +7,6 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class CartPage {
 
@@ -18,8 +17,8 @@ public class CartPage {
         //check whether cart has any items in it
         LoginPage.syscoLabUIOgm.click(LoginPage.syscoLabUIOgm.findElement(By.xpath("//div[@class='minicart-wrapper']")));
 
-            //List<WebElement> msgList = LoginPage.syscoLabUIOgm.findElements(By.xpath("//span[contains(text(),'You have no items in your shopping cart.')]"));
-           // LoginPage.syscoLabUIOgm.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        //List<WebElement> msgList = LoginPage.syscoLabUIOgm.findElements(By.xpath("//span[contains(text(),'You have no items in your shopping cart.')]"));
+        // LoginPage.syscoLabUIOgm.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
         /*try{
             if(msgList.size()>0){
@@ -58,15 +57,16 @@ public class CartPage {
         WebElement viewCart = LoginPage.syscoLabUIOgm.findElement(By.xpath("//a[@href='https://www.theathletesfoot.com.au/checkout/cart/']"));
         LoginPage.syscoLabUIOgm.click(viewCart);
 
-        LoginPage.syscoLabUIOgm.setTimeOut(1000);
-        String pageTitle = LoginPage.syscoLabUIOgm.getTitle();
-        System.out.println(pageTitle);
+        LoginPage.syscoLabUIOgm.setTimeOut(3000);
+        String pageUrl = LoginPage.syscoLabUIOgm.getCurrentURL();
+        System.out.println(pageUrl);
 
-        softAssert.assertEquals(pageTitle,"Shopping Cart");
+        softAssert.assertEquals(pageUrl, "https://www.theathletesfoot.com.au/checkout/cart/");
         softAssert.assertAll();
 
     }
-    public void manageShoppingCart(){
+
+    public void manageShoppingCart() {
         LoginPage.syscoLabUIOgm.setTimeOut(1000);
         Boolean isShoppingCartTableDisplayed = LoginPage.syscoLabUIOgm.isDisplayed(By.id("shopping-cart-table"));
         System.out.println(isShoppingCartTableDisplayed);
@@ -74,19 +74,19 @@ public class CartPage {
         List<WebElement> items = LoginPage.syscoLabUIOgm.findElements(By.xpath("//tbody[@class='cart item']"));
         int itemCount = items.size();
 
-        if(itemCount != 0){
-            for(WebElement productList:items){
+        if (itemCount != 0) {
+            for (WebElement productList : items) {
                 WebElement removeButton = LoginPage.syscoLabUIOgm.findElement(By.xpath("//a[@class='action action-delete']"));
                 LoginPage.syscoLabUIOgm.click(removeButton);
             }
-        }else{
+        } else {
             Boolean isNoItemMessageDisplayed = LoginPage.syscoLabUIOgm.findElement(By.xpath("//span[contains(text(),'You have no items in your shopping cart.')]")).isDisplayed();
-            softAssert.assertTrue(isNoItemMessageDisplayed,"Message was not displayed");
+            softAssert.assertTrue(isNoItemMessageDisplayed, "Message was not displayed");
             softAssert.assertAll();
         }
     }
 
-    public void addItemsToShoppingCart(){
+    public void addItemsToShoppingCart() {
 
         LoginPage.syscoLabUIOgm.findElement(By.xpath("//a[@href='https://www.theathletesfoot.com.au/']")).click();
 
@@ -104,20 +104,14 @@ public class CartPage {
         int randomValue = random.nextInt(products.size());
         LoginPage.syscoLabUIOgm.moveToAndClick(products.get(randomValue));
 
-        //WebElement element =  LoginPage.syscoLabUIOgm.findElement(By.xpath("//div[contains(text(),'MED')]"));
-        //LoginPage.syscoLabUIOgm.scrollToElement(element);
-        //JavascriptExecutor executor = (JavascriptExecutor)LoginPage.syscoLabUIOgm.getDriver();
-        //executor.executeScript("arguments[0].click();", element);
-
         List<WebElement> productSize = LoginPage.syscoLabUIOgm.findElements(By.xpath("//div[@class='swatch-option text']"));
         int productSizeCount = productSize.size();
         System.out.println(productSizeCount);
 
         Random randomSize = new Random();
         int randomSizeValue = randomSize.nextInt(productSize.size());
-        //LoginPage.syscoLabUIOgm.moveToAndClick(productSize.get(randomSizeValue));
         LoginPage.syscoLabUIOgm.scrollToElement(productSize.get(randomSizeValue));
-        JavascriptExecutor executor = (JavascriptExecutor)LoginPage.syscoLabUIOgm.getDriver();
+        JavascriptExecutor executor = (JavascriptExecutor) LoginPage.syscoLabUIOgm.getDriver();
         executor.executeScript("arguments[0].click();", productSize.get(randomSizeValue));
 
         WebElement addToCartBtn = LoginPage.syscoLabUIOgm.findElement(By.id("product-addtocart-button"));
@@ -140,4 +134,3 @@ public class CartPage {
 
     }
 }
-//commit test

@@ -62,8 +62,8 @@ public class CheckoutPage {
         LoginPage.syscoLabUIOgm.sendKeys(inputTelephone,"999999999");
 
         WebElement continueBtn = LoginPage.syscoLabUIOgm.findElement(By.xpath("//button[@title='Continue']"));
-        LoginPage.syscoLabUIOgm.scrollToElement(continueBtn);
-        continueBtn.click();
+        //LoginPage.syscoLabUIOgm.scrollToElement(continueBtn);
+        LoginPage.syscoLabUIOgm.moveToAndClick(continueBtn);
 
     }
 
