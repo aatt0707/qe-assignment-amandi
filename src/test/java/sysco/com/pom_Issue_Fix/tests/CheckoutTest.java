@@ -7,28 +7,24 @@ import sysco.com.pom_Issue_Fix.utils.TestBase;
 
 public class CheckoutTest extends TestBase {
 
-    @Test
+    @Test(priority = 6)
     public void validateCustomerDetails() {
         Checkout.validateCustomerDetails();
+    }
+
+    @Test(priority = 7)
+    public void validateMandatoryFields() {
         Checkout.validateMandatoryFields();
+    }
+
+    @Test(priority = 8)
+    public void fillMandatoryFields() {
         Checkout.fillMandatoryFields();
+    }
+
+    @Test(priority = 9)
+    public void selectPaymentInformation() {
         Checkout.selectPaymentInformation();
         Login.quiteDriver();
-    }
-
-    @Test
-    public void validateMandatoryFields() {
-        //Checkout.validateMandatoryFields();
-    }
-
-    @Test
-    public void fillMandatoryFields() {
-        //Checkout.fillMandatoryFields();
-    }
-
-    @Test
-    public void selectPaymentInformation() {
-        //Checkout.selectPaymentInformation();
-        //Login.quiteDriver();
     }
 }

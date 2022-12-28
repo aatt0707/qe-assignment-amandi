@@ -17,7 +17,7 @@ public class LoginTest extends TestBase {
         iTestContext.setAttribute("feature", "Login - ValidLogin");
     }
 
-    @Test
+    @Test(priority = 1)
     public void testLogin() throws Exception {
 
         // Sample way to retrive data from excel

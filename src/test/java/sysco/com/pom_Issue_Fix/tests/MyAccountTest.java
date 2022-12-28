@@ -5,7 +5,7 @@ import sysco.com.pom_Issue_Fix.functions.MyAccount;
 import sysco.com.pom_Issue_Fix.utils.TestBase;
 
 public class MyAccountTest extends TestBase {
-    @Test
+    @Test(priority = 2)
     public void validateMyAccount() throws Exception{
         MyAccount.getPageTitle();
         MyAccount.validateCustomerName();
