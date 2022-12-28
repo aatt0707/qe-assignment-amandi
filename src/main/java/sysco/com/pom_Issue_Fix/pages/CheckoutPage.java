@@ -60,12 +60,14 @@ public class CheckoutPage {
         LoginPage.syscoLabUIOgm.moveToAndClick(inputPhoneNumber);
         WebElement inputTelephone = LoginPage.syscoLabUIOgm.findElement(By.xpath("//input[@name='telephone']"));
         LoginPage.syscoLabUIOgm.sendKeys(inputTelephone,"999999999");
+        LoginPage.syscoLabUIOgm.findElement(By.xpath("//html")).click();
 
         LoginPage.syscoLabUIOgm.setTimeOut(2000);
         WebElement continueBtn = LoginPage.syscoLabUIOgm.findElement(By.xpath("//button[@title='Continue']"));
         LoginPage.syscoLabUIOgm.scrollToElement(continueBtn);
-        JavascriptExecutor executor = (JavascriptExecutor) LoginPage.syscoLabUIOgm.getDriver();
+        JavascriptExecutor executor = (JavascriptExecutor)LoginPage.syscoLabUIOgm.getDriver();
         executor.executeScript("arguments[0].click();", continueBtn);
+
 
     }
 
