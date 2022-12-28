@@ -7,63 +7,60 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class CartPage {
 
     public SoftAssert softAssert = new SoftAssert();
+    public static Boolean isMsgListEmpty;
 
-    public void viewShoppingCart(){
+
+    public void viewShoppingCart() {
 
         //check whether cart has any items in it
         LoginPage.syscoLabUIOgm.click(LoginPage.syscoLabUIOgm.findElement(By.xpath("//div[@class='minicart-wrapper']")));
 
-        //List<WebElement> msgList = LoginPage.syscoLabUIOgm.findElements(By.xpath("//span[contains(text(),'You have no items in your shopping cart.')]"));
-        // LoginPage.syscoLabUIOgm.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        try {
+            LoginPage.syscoLabUIOgm.driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            isMsgListEmpty = LoginPage.syscoLabUIOgm.findElements(By.xpath("//span[contains(text(),'You have no items in your shopping cart.')]")).size() > 0;
+            LoginPage.syscoLabUIOgm.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            System.out.println("No items message was not displayed");
+        }
 
-        /*try{
-            if(msgList.size()>0){
-                System.out.println("invalid");
-                String noItemMessage = LoginPage.syscoLabUIOgm.findElement(By.xpath("//span[contains(text(),'You have no items in your shopping cart.')]")).getText();
-                softAssert.assertEquals(noItemMessage,"You have no items in your shopping cart.");
-                softAssert.assertAll();
+        if (isMsgListEmpty == true) {
+            System.out.println("invalid");
+            String noItemMessage = LoginPage.syscoLabUIOgm.findElement(By.xpath("//span[contains(text(),'You have no items in your shopping cart.')]")).getText();
+            softAssert.assertEquals(noItemMessage, "You have no items in your shopping cart.");
 
-                LoginPage.syscoLabUIOgm.setTimeOut(1000);
-                String pageTitle = LoginPage.syscoLabUIOgm.getTitle();
-                System.out.println(pageTitle);
+            LoginPage.syscoLabUIOgm.setTimeOut(1000);
+            String pageTitle = LoginPage.syscoLabUIOgm.getTitle();
+            System.out.println(pageTitle);
 
-                softAssert.assertEquals(pageTitle,"My Account");
-                softAssert.assertAll();
+            if (pageTitle.equalsIgnoreCase("My Account")) {
+                softAssert.assertEquals(pageTitle, "My Account");
+            } else {
+                softAssert.assertEquals(pageTitle, "Customer Login");
             }
-            else{
-
-                System.out.println("valid");
-
-                WebElement viewCart = LoginPage.syscoLabUIOgm.findElement(By.xpath("//a[@href='https://www.theathletesfoot.com.au/checkout/cart/']"));
-                LoginPage.syscoLabUIOgm.moveToAndClick(viewCart);
-
-                LoginPage.syscoLabUIOgm.setTimeOut(1000);
-                String pageTitle = LoginPage.syscoLabUIOgm.getTitle();
-                System.out.println(pageTitle);
-
-                softAssert.assertEquals(pageTitle,"Shopping Cart");
-                softAssert.assertAll();
+            softAssert.assertAll();
+            LoginPage.syscoLabUIOgm.quit();
+        } else {
+            System.out.println("valid");
+            try {
+                WebElement viewCart = LoginPage.syscoLabUIOgm.getDriver().findElement(By.xpath("//*[@href='https://www.theathletesfoot.com.au/checkout/cart/']"));
+                LoginPage.syscoLabUIOgm.scrollToElement(viewCart);
+                JavascriptExecutor executor = (JavascriptExecutor) LoginPage.syscoLabUIOgm.getDriver();
+                executor.executeScript("arguments[0].click();", viewCart);
+            } catch (Exception e) {
+                System.out.println("Element not found");
             }
-        }catch(Exception e){
-            System.out.println("Exception");
-        }*/
+            LoginPage.syscoLabUIOgm.setTimeOut(1000);
+            String pageUrl = LoginPage.syscoLabUIOgm.getCurrentURL();
+            System.out.println(pageUrl);
 
-        LoginPage.syscoLabUIOgm.setTimeOut(1000);
-        LoginPage.syscoLabUIOgm.scrollToElement(By.xpath("//a[@href='https://www.theathletesfoot.com.au/checkout/cart/']"));
-        WebElement viewCart = LoginPage.syscoLabUIOgm.findElement(By.xpath("//a[@href='https://www.theathletesfoot.com.au/checkout/cart/']"));
-        LoginPage.syscoLabUIOgm.click(viewCart);
-
-        LoginPage.syscoLabUIOgm.setTimeOut(3000);
-        String pageUrl = LoginPage.syscoLabUIOgm.getCurrentURL();
-        System.out.println(pageUrl);
-
-        softAssert.assertEquals(pageUrl, "https://www.theathletesfoot.com.au/checkout/cart/");
-        softAssert.assertAll();
-
+            softAssert.assertEquals(pageUrl, "https://www.theathletesfoot.com.au/checkout/cart/");
+            softAssert.assertAll();
+        }
     }
 
     public void manageShoppingCart() {
@@ -119,7 +116,15 @@ public class CartPage {
         LoginPage.syscoLabUIOgm.click(addToCartBtn);
 
         LoginPage.syscoLabUIOgm.setTimeOut(1000);
-        viewShoppingCart();
+
+        LoginPage.syscoLabUIOgm.click(LoginPage.syscoLabUIOgm.findElement(By.xpath("//div[@class='minicart-wrapper']")));
+
+        LoginPage.syscoLabUIOgm.setTimeOut(1000);
+        WebElement viewCart = LoginPage.syscoLabUIOgm.getDriver().findElement(By.xpath("//*[@href='https://www.theathletesfoot.com.au/checkout/cart/']"));
+        LoginPage.syscoLabUIOgm.scrollToElement(viewCart);
+        JavascriptExecutor executor1 = (JavascriptExecutor) LoginPage.syscoLabUIOgm.getDriver();
+        executor1.executeScript("arguments[0].click();", viewCart);
+        //viewShoppingCart();
 
         WebElement product = LoginPage.syscoLabUIOgm.findElement(By.xpath("//td[@class='col item']//div//strong//a"));
         String productName = product.getText();
@@ -129,6 +134,7 @@ public class CartPage {
         String productUnitPrice = unitPrice.getText();
         System.out.println(productUnitPrice);
 
+        LoginPage.syscoLabUIOgm.setTimeOut(2000);
         WebElement secureCheckOutBtn = LoginPage.syscoLabUIOgm.findElement(By.xpath("//button[@title='Proceed to Checkout']"));
         LoginPage.syscoLabUIOgm.click(secureCheckOutBtn);
 

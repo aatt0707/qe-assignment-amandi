@@ -10,21 +10,25 @@ public class CheckoutTest extends TestBase {
     @Test
     public void validateCustomerDetails() {
         Checkout.validateCustomerDetails();
+        Checkout.validateMandatoryFields();
+        Checkout.fillMandatoryFields();
+        Checkout.selectPaymentInformation();
+        Login.quiteDriver();
     }
 
     @Test
     public void validateMandatoryFields() {
-        Checkout.validateMandatoryFields();
+        //Checkout.validateMandatoryFields();
     }
 
     @Test
     public void fillMandatoryFields() {
-        Checkout.fillMandatoryFields();
+        //Checkout.fillMandatoryFields();
     }
 
     @Test
     public void selectPaymentInformation() {
-        Checkout.selectPaymentInformation();
-        Login.quiteDriver();
+        //Checkout.selectPaymentInformation();
+        //Login.quiteDriver();
     }
 }

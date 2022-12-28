@@ -51,19 +51,21 @@ public class CheckoutPage {
         inputPostCode.sendKeys("2000");
         WebElement code = LoginPage.syscoLabUIOgm.findElement(By.xpath("(//a[@class='link ui-corner-all'])[3]"));
         LoginPage.syscoLabUIOgm.scrollToElement(code);
-        code.click();
+        LoginPage.syscoLabUIOgm.moveToAndClick(code);
 
         WebElement inputAddress = LoginPage.syscoLabUIOgm.findElement(By.xpath("//input[@name='street[0]']"));
         LoginPage.syscoLabUIOgm.sendKeys(inputAddress,"Bakers Street");
 
         WebElement inputPhoneNumber = LoginPage.syscoLabUIOgm.findElement(By.xpath("//div[@class='placeholder-wrapper-au']"));
-        inputPhoneNumber.click();
+        LoginPage.syscoLabUIOgm.moveToAndClick(inputPhoneNumber);
         WebElement inputTelephone = LoginPage.syscoLabUIOgm.findElement(By.xpath("//input[@name='telephone']"));
         LoginPage.syscoLabUIOgm.sendKeys(inputTelephone,"999999999");
 
+        LoginPage.syscoLabUIOgm.setTimeOut(2000);
         WebElement continueBtn = LoginPage.syscoLabUIOgm.findElement(By.xpath("//button[@title='Continue']"));
-        //LoginPage.syscoLabUIOgm.scrollToElement(continueBtn);
-        LoginPage.syscoLabUIOgm.moveToAndClick(continueBtn);
+        LoginPage.syscoLabUIOgm.scrollToElement(continueBtn);
+        JavascriptExecutor executor = (JavascriptExecutor) LoginPage.syscoLabUIOgm.getDriver();
+        executor.executeScript("arguments[0].click();", continueBtn);
 
     }
 
