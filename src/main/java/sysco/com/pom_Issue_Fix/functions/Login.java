@@ -1,6 +1,7 @@
 package sysco.com.pom_Issue_Fix.functions;
 
 import sysco.com.pom_Issue_Fix.common.Constants;
+import sysco.com.pom_Issue_Fix.data.LoginData;
 import sysco.com.pom_Issue_Fix.pages.LoginPage;
 import sysco.com.pom_Issue_Fix.utils.DriverSetUpUtil;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -31,8 +32,8 @@ public class Login {
         loginPage.validateLoginSectionValidations();
     }
 
-    public static void customerLogin() {
-        loginPage.customerLogin();
+    public static void customerLogin(LoginData loginData) {
+        loginPage.customerLogin(loginData.userName, loginData.password);
     }
 
     public static void quiteDriver() {

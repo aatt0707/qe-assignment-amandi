@@ -7,6 +7,7 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebElement;
 import org.testng.asserts.SoftAssert;
 
+
 /**
  * Created by Rifad on 5/21/18.
  */
@@ -67,10 +68,10 @@ public class LoginPage {
         softAssert.assertAll();
     }
 
-    public void customerLogin(){
+    public void customerLogin(String userName, String password){
         syscoLabUIOgm.setTimeOut(1000);
-        syscoLabUIOgm.sendKeys(By.id("email"), "terry.anderson@gmail.com");
-        syscoLabUIOgm.sendKeys(By.id("pass"), "terry@1234");
+        syscoLabUIOgm.sendKeys(By.id("email"), userName);
+        syscoLabUIOgm.sendKeys(By.id("pass"), password);
         syscoLabUIOgm.click(syscoLabUIOgm.findElement(By.xpath("//button[@id='send2']")));
     }
 

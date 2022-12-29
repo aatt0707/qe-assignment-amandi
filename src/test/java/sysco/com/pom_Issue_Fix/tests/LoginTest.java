@@ -23,11 +23,12 @@ public class LoginTest extends TestBase {
         // Sample way to retrive data from excel
         LoginData loginData = ExcelUtil.getLoginData("$as238l");
 
+
         //UI Automation  sample
         Login.loadLoginPage();
         Login.validateLoginButton();
         Login.validateLoginSectionValidations();
-        Login.customerLogin();
+        Login.customerLogin(loginData);
 
     }
 }
