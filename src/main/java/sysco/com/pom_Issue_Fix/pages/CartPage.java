@@ -1,5 +1,6 @@
 package sysco.com.pom_Issue_Fix.pages;
 
+import com.syscolab.qe.core.common.LoggerUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -45,18 +46,19 @@ public class CartPage {
             softAssert.assertAll();
             LoginPage.syscoLabUIOgm.quit();
         } else {
-            System.out.println("valid");
+            LoggerUtil.logINFO("valid");
             try {
                 WebElement viewCart = LoginPage.syscoLabUIOgm.getDriver().findElement(By.xpath("//*[@href='https://www.theathletesfoot.com.au/checkout/cart/']"));
                 LoginPage.syscoLabUIOgm.scrollToElement(viewCart);
                 JavascriptExecutor executor = (JavascriptExecutor) LoginPage.syscoLabUIOgm.getDriver();
                 executor.executeScript("arguments[0].click();", viewCart);
             } catch (Exception e) {
-                System.out.println("Element not found");
+                LoggerUtil.logINFO("Element not found");
             }
             LoginPage.syscoLabUIOgm.setTimeOut(1000);
             String pageUrl = LoginPage.syscoLabUIOgm.getCurrentURL();
-            System.out.println(pageUrl);
+
+            LoggerUtil.logINFO(pageUrl);
 
             softAssert.assertEquals(pageUrl, "https://www.theathletesfoot.com.au/checkout/cart/");
             softAssert.assertAll();
@@ -128,11 +130,11 @@ public class CartPage {
 
         WebElement product = LoginPage.syscoLabUIOgm.findElement(By.xpath("//td[@class='col item']//div//strong//a"));
         String productName = product.getText();
-        System.out.println(productName);
+        LoggerUtil.logINFO(productName);
 
         WebElement unitPrice = LoginPage.syscoLabUIOgm.findElement(By.xpath("//td[@class='col price']//span[@class='price']"));
         String productUnitPrice = unitPrice.getText();
-        System.out.println(productUnitPrice);
+        LoggerUtil.logINFO(productUnitPrice);
 
         LoginPage.syscoLabUIOgm.setTimeOut(2000);
         WebElement secureCheckOutBtn = LoginPage.syscoLabUIOgm.findElement(By.xpath("//button[@title='Proceed to Checkout']"));

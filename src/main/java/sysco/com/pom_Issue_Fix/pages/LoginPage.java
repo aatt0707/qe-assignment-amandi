@@ -15,6 +15,7 @@ public class LoginPage {
     public static SoftAssert softAssert = new SoftAssert();
     protected static SyscoLabUI syscoLabUIOgm;
     private By txtGoogleSearch = By.id("lst-ib");
+    private By btnLogin = By.xpath("//button[@id='send2']");
 
 
     public static void loadLoginPage(Capabilities capabilities, String url) {
@@ -31,13 +32,12 @@ public class LoginPage {
     public void validateLoginButton(){
         syscoLabUIOgm.setTimeOut(1000);
 
-        Boolean isDisplayedLoginButton = syscoLabUIOgm.isDisplayed(syscoLabUIOgm.findElement(By.xpath("//button[@id='send2']")));
+        Boolean isDisplayedLoginButton = syscoLabUIOgm.isDisplayed(btnLogin);
         softAssert.assertTrue(isDisplayedLoginButton,"Login button is not exists");
 
         syscoLabUIOgm.setTimeOut(1000);
-        syscoLabUIOgm.scrollToElement(By.xpath("//button[@id='send2']"));
-        WebElement loginBtn = syscoLabUIOgm.findElement(By.xpath("//button[@id='send2']"));
-        syscoLabUIOgm.click(loginBtn);
+        syscoLabUIOgm.scrollToElement(btnLogin);
+        syscoLabUIOgm.click(btnLogin);
 
         softAssert.assertAll();
     }
